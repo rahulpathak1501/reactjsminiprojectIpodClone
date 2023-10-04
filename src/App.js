@@ -1,9 +1,10 @@
 import React,{Component} from "react";
+import Wheel from "./wheel"
 
 function App() {
   return (
     <div className="App">
-      
+      <Wheel/>
     </div>
   );
 }

@@ -1,0 +1,47 @@
+
+.outside-rounded-div {
+    width: 200px;
+    height: 200px;
+    background-color: #3498db;
+    border-radius: 50%;
+    display: flex;
+    position: relative;
+  }
+  .inside-rounded-div{
+    background-color: #e74c3c;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .menu{
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+  .forward{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+  }
+  .backward{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(40%, -50%);
+  }
+  .play-pause{
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -160%);
+    
+  }
