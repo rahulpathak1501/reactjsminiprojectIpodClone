@@ -1,10 +1,11 @@
 import React,{Component} from "react";
 import Wheel from "./wheel"
+import Screen from "./screen"
 
 function App() {
   return (
     <div className="App">
-      <Wheel/>
+      <Screen/>
     </div>
   );
 }
