@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import Wheel from "./wheel"
-import Screen from "./screen"
+import Screen from "./mainScreen"
 
 function App() {
   return (

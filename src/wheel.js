@@ -7,11 +7,10 @@ class Wheel extends React.Component {
     super();
     this.state = {
       rotation: 0,
+      rotationActive: false,
     };
-    this.prevAngle = null;
-    this.innerCircleRadius = 50;
-    this.oncliked = false;
     this.outerDivRef = React.createRef();
+    this.innerCircleRef = React.createRef();
   }
 
   componentDidMount() {
@@ -20,13 +19,61 @@ class Wheel extends React.Component {
     region.bind(this.outerDivRef.current, "rotate", (e) => {
       const newRotation = this.state.rotation + e.detail.distanceFromLast;
 
-      this.props.onRotationChange(newRotation);
+      if (newRotation > 360) {
+        this.state.rotation = 0;
+      }
 
-      console.log("Rotation Angle:", newRotation);
+      if (!this.state.rotationActive) {
+        this.props.onRotationChange(newRotation);
 
-      this.setState({ rotation: newRotation });
+        //console.log(this.state.rotationActive);
+
+        this.setState({ rotation: newRotation });
+      }
     });
   }
+
+  handleInnerCircleClick = () => {
+    // When the inner circle is clicked, toggle the rotation active state
+    this.setState((prevState) => ({
+      rotationActive: true,
+    }));
+
+    const activeMenuItem = this.props.activeMenuItem;
+    //console.log("wheel passing value" + activeMenuItem);
+    switch (activeMenuItem) {
+      case 0:
+        //console.log("Songs");
+        this.props.onInnerCircleClick(activeMenuItem);
+        break;
+      case 1:
+        //console.log("Artist");
+        this.props.onInnerCircleClick(activeMenuItem);
+        break;
+      case 2:
+        this.props.onInnerCircleClick(activeMenuItem);
+        console.log("Album");
+        break;
+      case 3:
+        this.props.onInnerCircleClick(activeMenuItem);
+        console.log("Playlist");
+        break;
+      default:
+        break;
+    }
+  };
+
+  handleOuterCircleClick = () => {
+    if (this.state.rotationActive) {
+      this.setState((prevState) => ({
+        rotationActive: false,
+      }));
+    }
+  };
+
+  handleMenuClick = () => {
+    this.props.onInnerCircleClick(-1);
+  };
 
   render() {
     return (
@@ -34,9 +81,12 @@ class Wheel extends React.Component {
         <div
           className="outside-rounded-div"
           ref={this.outerDivRef}
+          onClick={this.handleOuterCircleClick}
           style={{ touchAction: "none" }}
         >
-          <p className="menu">Menu</p>
+          <p className="menu">
+            <a onClick={this.handleMenuClick}>Menu</a>
+          </p>
           <img
             width="20"
             height="20"
@@ -61,6 +111,7 @@ class Wheel extends React.Component {
           {/* <p className='backward'>backward</p> */}
           <div
             className="inside-rounded-div"
+            ref={this.innerCircleRef}
             onClick={this.handleInnerCircleClick}
           ></div>
         </div>
